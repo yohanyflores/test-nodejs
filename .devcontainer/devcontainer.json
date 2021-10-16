@@ -1,0 +1,29 @@
+{
+	"name": "Node.js & Typescript & Mongo DB",
+	"dockerComposeFile": "docker-compose.yml",
+	"service": "app",
+	"runServices": ["mongo-express"],
+	"workspaceFolder": "/workspace/walter",
+    "remoteEnv": {
+        "WORKSPACE_FOLDER": "/workspaces/walter",
+    },
+
+	"shutdownAction": "stopCompose",
+
+	"settings": {
+	},
+
+	"extensions": [
+		"dbaeumer.vscode-eslint",
+		"mongodb.mongodb-vscode",
+		"dlech.chmod",
+		"ms-azuretools.vscode-docker"
+	],
+
+	// "forwardPorts": [3000, 27017],
+
+	"postCreateCommand": "./.devcontainer/scripts/container/post-create.sh",
+	"postAttachCommand": "./.devcontainer/scripts/container/post-attach.sh",
+
+	"remoteUser": "node"
+}

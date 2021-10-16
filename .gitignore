@@ -37,3 +37,13 @@ lerna-debug.log*
 .env
 .env.development
 /mongo-volume
+
+# Developer extensions Vscode
+/.devcontainer/volumes/vscode_extensions/*
+!/.devcontainer/volumes/vscode_extensions/.gitkeep
+/.devcontainer/volumes/vscode_insider/*
+!/.devcontainer/volumes/vscode_insider/.gitkeep
+
+# Container cache
+/.devcontainer/volumes/cache/*
+!/.devcontainer/volumes/cache/.gitkeep

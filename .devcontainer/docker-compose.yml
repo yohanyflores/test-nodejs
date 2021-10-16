@@ -1,0 +1,56 @@
+version: '3.9'
+
+services:
+  app:
+    user: "${USER_UID:-1000}:${USER_GID:-1000}"
+    build: 
+      context: .
+      dockerfile: Dockerfile
+      args:
+        VARIANT: 16-buster
+        # Edite estas variables creando un .env
+        USERNAME: node
+        USER_UID: ${USER_UID:-1000}
+        USER_GID: ${USER_GID:-1000}
+        # Mongodb 
+        MONGO_TOOLS_VERSION: "4.2"
+    volumes:
+      - ..:/workspace/walter:cached
+      - ./volumes/cache:/home/node/.cache:cached
+      - ./volumes/vscode_extensions:/home/node/.vscode-server/extensions:cached
+      - ./volumes/vscode_insider:/home/node/.vscode-server-insiders/extensions:cached
+    command: sleep infinity
+    network_mode: service:db
+    depends_on:
+      - db
+
+  db:
+    image: mongo:latest
+    #restart: unless-stopped
+    container_name: 'walter-db'
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: walter_user
+      MONGO_INITDB_ROOT_PASSWORD: secret
+      MONGO_INITDB_DATABASE: walter_db
+    volumes:
+      - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d:ro
+      - mongodb-data:/data/db
+    ports:
+      - '27017-27019:27017-27019'
+  
+  mongo-express:
+    image: mongo-express
+    #restart: always
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: walter_user
+      ME_CONFIG_MONGODB_ADMINPASSWORD: secret
+      ME_CONFIG_MONGODB_URL: mongodb://walter_user:secret@db:27017
+    depends_on:
+      - db
+
+volumes:
+  mongodb-data:      # Para mongo prsistencia.
+  vscode_extensions: # Para persistencia de las extensiones.
+  vscode_insider:    # Para persistencia de las extensiones
