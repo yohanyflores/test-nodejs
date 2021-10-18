@@ -5,10 +5,7 @@ import { UserDTO } from '../user/dto/user.dto';
 
 @Injectable()
 export class AuthService {
-  constructor(
-    private readonly userService: UserService,
-    private readonly jwtService: JwtService,
-  ) {}
+  constructor(private readonly userService: UserService, private readonly jwtService: JwtService) {}
 
   async validateUser(username: string, password: string): Promise<any> {
     const user = await this.userService.getByUsername(username);
@@ -16,10 +13,7 @@ export class AuthService {
       return null;
     }
 
-    const isValidPassword = await this.userService.checkPassword(
-      password,
-      user.password,
-    );
+    const isValidPassword = await this.userService.checkPassword(password, user.password);
 
     if (user && isValidPassword) return user;
 
