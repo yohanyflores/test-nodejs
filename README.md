@@ -1,4 +1,8 @@
 
+Prueba de conceptos con Node, Typescript, MongoDB y Nestjs.
+
+Realizando algunas practicas.
+
 Readme Anterior en -> [README ANTERIOR](README-OLD.md)
 
 # License
