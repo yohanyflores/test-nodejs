@@ -1,0 +1,13 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Run Walter Dev",
+            "detail": "Ejecuta Walter en modo dev",
+            "type": "shell",
+            "command": "yarn run start:dev"
+        }
+    ]
+}
