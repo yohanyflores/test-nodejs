@@ -64,7 +64,7 @@ Luego que arranque podemos ver la documentacion del API en:
 
 # Problemas
 
-En el codigo  inicial suministrado por https://drive.google.com/file/d/1e-C0dHt6t6rgTFrDIM5aWXzX6m2sz0Ar/view?usp=sharing. El modulo de autenticacion no funcionaba correctamente, si bien logro general los access token, el mismo access token no era verificado correctamente por el api. Luego de investigar las causas perdiendo tiempo aprovechable  se logro identificar la causa y corregirla. Una condicion de Carrera entre el modulo ConfigService de NestJS y el Modulo de Auth ocasionaba que las variables de entorno `JWT_SECRET` y `EXPIRES_IN` especificadas en el archivo `.env.development` no fueran leidas correctamente por el Modulo de auth `process.env.JWT_SECRET`. Ocasionando que las verificaciones fallaran. Se corrigio accesando directamente el servicio del `configService`.
+En el codigo inicial descargado de https://drive.google.com/file/d/1e-C0dHt6t6rgTFrDIM5aWXzX6m2sz0Ar/view?usp=sharing. El modulo de autenticacion no funcionaba correctamente, si bien logro general los access token, el mismo access token no era verificado correctamente por el api. Luego de investigar las causas perdiendo tiempo aprovechable  se logro identificar la causa y corregirla. Una condicion de Carrera entre el modulo ConfigService de NestJS y el Modulo de Auth ocasionaba que las variables de entorno `JWT_SECRET` y `EXPIRES_IN` especificadas en el archivo `.env.development` no fueran leidas correctamente por el Modulo de auth `process.env.JWT_SECRET`. Ocasionando que las verificaciones fallaran. Se corrigio accesando directamente el servicio del `configService`.
 
 # Pruebas
 
